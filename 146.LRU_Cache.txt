@@ -1,0 +1,84 @@
+class LRUCache {
+public:
+    int keys[10001] = {0, };
+    bool isCached[10001] = {0, };
+    int whenUsed[10001] = {0, };
+    int index;
+    int count;
+    int limit;
+    deque< pair<int, int>> q;
+
+    LRUCache(int capacity) {
+        index = 0;
+        count = 0;
+        limit = capacity;
+    }
+    
+    int get(int key) {
+        index++;
+        if (!isCached[key] )
+            return -1; 
+        
+        if (q.front().first == key)
+            q.pop_front();
+        
+        pair <int, int> temp (key, index);
+        
+        q.push_back(temp);
+        whenUsed[key] = index;
+        return keys[key];
+        
+    }
+    
+    void put(int key, int value) {
+        index++;
+        if (isCached[key]) {
+            keys[key] = value;
+           pair<in, int> temp (key, index);
+            q.push_back(temp);
+            whenUsed[key] = index;
+            
+            return;
+        }
+        
+        if (count < limit) {
+            count++;
+            keys[key] = value;
+            isCached[key] = 1;
+            pair <int, int> temp (key, index);
+            q.push_back(temp);
+            whenUsed[key] = index;
+        }
+        else {
+            while (q.front().second != whenUsed[q.front().first])
+                q.pop_front();
+            
+            isCached[q.front().first] = 0;
+            q.pop_front();
+            
+            keys[key] = value;
+            isCached[key] = 1;
+            pair <int, int> temp (key, index);
+            q.push_back(temp);
+            whenUsed[key] = index;
+        }
+              
+    }
+};
+
+// 1 2 
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */ 
+
+
+/*
+    Success
+    Details 
+    Runtime: 376 ms, faster than 95.70% of C++ online submissions for LRU Cache.
+    Memory Usage: 165.1 MB, less than 81.29% of C++ online submissions for LRU Cache.
+*/
