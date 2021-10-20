@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> result;
+        
+        generator(0, 0, n, result, "");
+        
+        return result;
+        
+    }
+    
+private:
+    void generator(int op, int cl, int n, vector<string> &v, string s) {
+        if (op == n && cl == n) {
+            v.push_back(s);
+            return;
+        }
+        
+        if (op < n) {
+            generator(op+1, cl, n, v, s+"(");
+        }
+        
+        if (cl < op) {
+            generator(op, cl+1, n, v, s+")");
+        } 
+    }
+};
+
+
+/* 4 ms -- faster than 72.10%
+   13.8MB -- less than 48.96%
+
+    Time Complexity: 2^(2n)
+*/
+
+
