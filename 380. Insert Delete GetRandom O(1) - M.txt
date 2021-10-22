@@ -1,3 +1,6 @@
+# Runtime: 588 ms, faster than 49.77% of Python online submissions for Insert Delete GetRandom O(1).
+# Memory Usage: 59.5 MB, less than 31.16% of Python online submissions for Insert Delete GetRandom O(1).
+
 class RandomizedSet(object):
 
     index = []
@@ -54,6 +57,3 @@ class RandomizedSet(object):
         
         return val
 
-
-# Runtime: 588 ms, faster than 49.77% of Python online submissions for Insert Delete GetRandom O(1).
-# Memory Usage: 59.5 MB, less than 31.16% of Python online submissions for Insert Delete GetRandom O(1).
