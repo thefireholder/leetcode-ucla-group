@@ -1,0 +1,34 @@
+import random
+class RandomizedSet:
+
+    def __init__(self):
+        self.idx = {}
+        self.num = []
+
+    def insert(self, val: int) -> bool:
+        if val in self.idx : 
+            return False
+        else: #check if val is in hash
+            self.num.append(val)
+            self.idx[val] = len(self.num) - 1  #update hash
+            return True
+
+    def remove(self, val: int) -> bool:
+        if val in self.idx:
+            lastnum = self.num[-1]
+            index= self.idx[val]
+            self.num[index], self.idx[lastnum] = lastnum, index
+            self.num.pop()      #pop from list and hash
+            self.idx.pop(val, 0) 
+            return True
+        return False
+        
+    def getRandom(self) -> int:
+        return self.num[random.randint(0, len(self.num) - 1)]
+    
+
+# Your RandomizedSet object will be instantiated and called as such:
+# obj = RandomizedSet()
+# param_1 = obj.insert(val)
+# param_2 = obj.remove(val)
+# param_3 = obj.getRandom()
