@@ -1,0 +1,59 @@
+class RandomizedSet(object):
+
+    index = []
+    mapping = {}
+    
+    def __init__(self):
+        self.index = []
+        self.mapping = {}
+        
+
+    def insert(self, val):
+        """
+        :type val: int
+        :rtype: bool
+        """
+        returnV = False
+        try: 
+            self.mapping[val]
+            return False
+        
+        except KeyError:
+            self.mapping[val]=len(self.index)
+            self.index.append(val)
+            return True
+
+    def remove(self, val):
+        """
+        :type val: int
+        :rtype: bool
+        """
+        try: 
+            i = self.mapping[val]
+            if i == len(self.index)-1: 
+                self.index.pop()
+            else:
+                v = self.index.pop()
+                self.index[i] = v
+                self.mapping[v] = i
+                
+            del self.mapping[val]
+                
+            return True
+        
+        except KeyError:
+            return False
+
+    def getRandom(self):
+        """
+        :rtype: int
+        """
+        
+        i = random.randint(0, len(self.index)-1)    
+        val = self.index[i]
+        
+        return val
+
+
+# Runtime: 588 ms, faster than 49.77% of Python online submissions for Insert Delete GetRandom O(1).
+# Memory Usage: 59.5 MB, less than 31.16% of Python online submissions for Insert Delete GetRandom O(1).
