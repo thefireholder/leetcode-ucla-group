@@ -1,0 +1,20 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        result = []
+        
+        def p(stack, op, cl) :
+            if op == cl == n : 
+                result.append(stack)
+                return
+            
+            if op < n : 
+                p(stack + "(", op + 1, cl)
+                
+            if cl < op : 
+                p(stack + ")", op, cl + 1)
+    
+        p("", 0, 0)   
+        return result
+            
+            
+            
