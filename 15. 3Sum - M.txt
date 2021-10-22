@@ -1,0 +1,100 @@
+# Runtime: 4308 ms, faster than 17.55% of Python3 online submissions for 3Sum.
+# Memory Usage: 150.4 MB, less than 5.19% of Python3 online submissions for 3Sum.
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        
+        result = []
+        
+        nums.sort()
+        mm = {}
+        for i in range(len(nums)):
+            
+            ## clean up some duplicate [0,0,0,0,1,1,1,1,,2,2,2,]
+            if i > 2:
+                if nums[i] == nums[i-2]: continue
+            
+            
+            j = 1
+            a = nums[i]
+            # for negative sums
+            while i+j < len(nums) and nums[i+j] < 0:
+                # store negative sum in positive key
+                b = nums[i+j]
+                v = a + b
+                try:
+                    mm[-v]
+                    duplicate = False
+                    for mmm in mm[-v]:
+                        if a == mmm[0]:
+                            duplicate = True
+                            break
+                    if duplicate:
+                        j+=1
+                        continue
+                    else:
+                        mm[-v].append([a,b])
+                except KeyError:
+                    mm[-v] = [[a,b]]
+                j+=1
+                # print(v,a,b)
+            
+                
+            if a >= 0:
+                # check for two sum
+                try:
+                    # print(a)
+                    for mmm in mm[a]:
+                        if len(mmm) == 2:
+                            mmm.append(a)
+                            result.append(mmm)
+                except KeyError:
+                    # print(a)
+                    pass
+                except TypeError:
+                    pass
+                
+                # two sum see if they are in single negative
+                
+                j = 1
+                while i+j < len(nums):
+                    b = nums[i+j]
+                    v = a + b
+                    # print(i,j,a,b,v)
+                    try:
+                        mm[-v]
+                        if isinstance(mm[-v],bool):
+                            mm[-v] = []
+                        
+                        duplicate = False
+                        for mmm in mm[-v]:
+                            # print("d",mmm[1],a)
+                            if mmm[1] == a: duplicate = True
+                        # print("d",duplicate)
+                        if not duplicate: 
+                            ne = [-v,a,b]
+                            mm[-v].append(ne)
+                            # print('n',i,j,a,b,v)
+                            result.append(ne)
+                            
+                    except KeyError: pass
+                    j+= 1
+                
+                    
+            # store single negatives
+            if a <= 0: 
+                try:
+                    mm[a]
+                except KeyError:
+                    mm[a] = True 
+                
+            
+            
+                
+                
+        
+        # print(mm)
+        # print(result)
+        
+        # print(nums)
+        return result
