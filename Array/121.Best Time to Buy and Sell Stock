@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int len = prices.size();
+        int minVal = prices[0];
+        int result = 0;
+       
+        for (int i = 1; i < len; i++) {
+            int diff = prices[i] - minVal;
+            if (result < diff)
+                result = diff;
+            
+            if (prices[i] < minVal)
+                minVal = prices[i];
+        }
+        
+        return result;
+    }
+};
+
+
+Runtime: 124 ms, faster than 60.29% of C++ online submissions for Best Time to Buy and Sell Stock.
+Memory Usage: 93.4 MB, less than 13.72% of C++ online submissions for Best Time to Buy and Sell Stock.
