@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int num = nums.size();
+        vector<int> result(num, 1);
+        
+        int front = 1;
+        int back = 1;
+        
+        for (int i = 0; i < num; i++) {
+            result[i] *= front;
+            front *= nums[i];
+            
+            result[num-i-1] *= back;
+            back *= nums[num-i-1];
+        }
+        
+        return result;
+    }
+};
+
+
+Runtime: 16 ms, faster than 97.69% of C++ online submissions for Product of Array Except Self.
+Memory Usage: 23.8 MB, less than 93.19% of C++ online submissions for Product of Array Except Self.

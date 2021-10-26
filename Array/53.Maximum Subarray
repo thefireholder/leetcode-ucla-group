@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int num = nums.size();
+        
+        if (num == 0)
+            return 0;
+        else if (num == 1)
+            return nums[0];
+        
+        int tempMax = nums[0];
+        int globalMax = nums[0];
+        
+        for (int i = 1; i < num; i++) {
+            tempMax = max(tempMax + nums[i], nums[i]);
+            globalMax = max(globalMax, tempMax);
+        }
+        
+        return globalMax;
+    }
+};
+
+
+Runtime: 96 ms, faster than 53.99% of C++ online submissions for Maximum Subarray.
+Memory Usage: 67.8 MB, less than 31.40% of C++ online submissions for Maximum Subarray.
