@@ -1,0 +1,21 @@
+# Runtime: 788 ms, faster than 42.62% of Python3 online submissions for Container With Most Water.
+# Memory Usage: 27.4 MB, less than 76.50% of Python3 online submissions for Container With Most Water.
+# was helped
+
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        
+        max_ = 0
+        l = 0
+        r = len(height)-1
+        while r-l > 0:
+            L = height[l]
+            R = height[r]
+            a = (r-l) * min(L,R)
+            # print(a)
+            max_ = max(a,max_)
+            
+            if L > R: r -= 1
+            else: l += 1
+        
+        return max_

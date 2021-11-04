@@ -1,0 +1,15 @@
+# Runtime: 36 ms, faster than 92.38% of Python3 online submissions for Find Minimum in Rotated Sorted Array.
+# Memory Usage: 14.7 MB, less than 29.41% of Python3 online submissions for Find Minimum in Rotated Sorted Array.
+
+class Solution:
+    
+    def c(self,n):
+        l = len(n)
+        if l == 1: return n[0]
+        m = int(l/2)
+        if n[m-1] < n[l-1]: return self.c(n[:m])
+        if n[m-1] > n[l-1]: return self.c(n[m:])
+    
+    def findMin(self, nums: List[int]) -> int:
+        return self.c(nums)
+        

@@ -1,0 +1,61 @@
+# Runtime: 52 ms, faster than 88.43% of Python3 online submissions for Maximum Product Subarray.
+# Memory Usage: 14.1 MB, less than 99.67% of Python3 online submissions for Maximum Product Subarray.
+
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        
+        max_ = nums[0]
+        start = 1
+        a = 1 # 1st neg mult
+        b = 1 # 2nd neg mult
+        c = 1 # current
+        bb = 1
+        cc = 1
+        firstNeg = True
+        stateM = 0
+        
+        for i in nums:
+            
+            
+            c *= i
+            max_ = max(start*c,max_)
+            
+            if i == 0:
+                a = 1
+                b = 1
+                c = 1
+                start = 1
+                firstNeg = True
+                stateM = 0
+                
+            
+            if i < 0:
+                if firstNeg:
+                    
+                    if stateM == 0:
+                        a = a * c
+                        start = 1
+                        stateM = 1
+                    
+                    else:
+                        a = a * c
+                        b = b * c
+                        start = b
+                        max_ = max(start,max_)
+                        
+                    firstNeg = False
+                    
+                    # if stateM > 0:
+                else:
+                    a = a * c
+                    b = b * c
+                    start = a
+                    
+                    max_ = max(start,max_)
+                    firstNeg = True
+                
+                # print(stateM, a,b,start)
+                c = 1
+                stateM += 1
+            
+        return max_

@@ -1,0 +1,29 @@
+# Runtime: 32 ms, faster than 98.38% of Python3 online submissions for Search in Rotated Sorted Array.
+# Memory Usage: 14.7 MB, less than 55.54% of Python3 online submissions for Search in Rotated Sorted Array.
+
+class Solution:
+        
+    
+    def search(self, nums: List[int], target: int) -> int:
+        
+        s = 0
+        e = len(nums)
+        m = int(e/2)
+        
+        while (e-s) > 2:
+            ss = nums[s]
+            mm = nums[m]
+            if ss < mm:
+                if target >= ss and target < mm: e = m
+                else : s = m
+            else:
+                if target >= ss or target < mm: e = m
+                else: s = m
+            m = int((e+s)/2)
+        
+        print(s,m,e)
+        if nums[s] == target: return s
+        elif nums[m] == target: return m
+        elif e < len(nums) and nums[e] == target: return e
+        else: return -1
+            
