@@ -1,0 +1,19 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+        elif len(nums) == 1:
+            return nums[0]
+        
+        minP, maxP, res = 1, 1, -float(inf)
+        for n in nums:
+            a, b = minP * n, maxP * n
+            minP, maxP = min(a, b, n), max(a, b, n)
+            res = max(res, maxP)
+        return res
+        
+            
+'''
+Runtime: 44 ms, faster than 99.09% of Python3 online submissions for Maximum Product Subarray.
+Memory Usage: 14.5 MB, less than 37.05% of Python3 online submissions for Maximum Product Subarray.
+'''
