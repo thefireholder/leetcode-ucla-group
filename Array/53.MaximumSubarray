@@ -1,0 +1,13 @@
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        a, b = nums[0], nums[0]
+        for n in nums[1:]:
+            a = max(n, a + n)
+            b = max(a, b) 
+        return b
+            
+
+'''
+Runtime: 756 ms, faster than 46.19% of Python3 online submissions for Maximum Subarray.
+Memory Usage: 28.1 MB, less than 60.39% of Python3 online submissions for Maximum Subarray.
+'''
