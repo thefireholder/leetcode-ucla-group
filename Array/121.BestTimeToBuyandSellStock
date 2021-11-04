@@ -1,0 +1,13 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if len(prices) < 2:
+            return 0
+        buy, diff = float(inf), 0 
+        for p in prices:
+            buy, diff = min(p, buy), max(diff, p-buy)
+        return diff
+
+'''
+Runtime: 1092 ms, faster than 59.95% of Python3 online submissions for Best Time to Buy and Sell Stock.
+Memory Usage: 25.1 MB, less than 83.35% of Python3 online submissions for Best Time to Buy and Sell Stock.
+'''
