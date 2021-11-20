@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n = s.size();
+        
+        vector<bool> dp(n+1, false);
+        dp[n] = true;
+        
+        for(int i = n-1; i >= 0; --i){
+            for(int j = i+1; j <= n; ++j){
+                // cout << i << ", " << j << ", " << s.substr(i, j-i) << endl;
+                if(dp[j] && find(wordDict.begin(), wordDict.end(), s.substr(i, j-i)) != wordDict.end()){
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        
+        return dp[0];
+    }
+};
+
+Runtime: 8 ms, faster than 71.65% of C++ online submissions for Word Break.
+Memory Usage: 9.4 MB, less than 69.59% of C++ online submissions for Word Break.

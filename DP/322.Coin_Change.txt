@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        int max = amount+1;
+        int len = coins.size();
+        
+        vector<int> v(max, max);
+        v[0] = 0;
+        
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i >= coins[j]) {
+                    v[i] = min (v[i], v[i-coins[j]] + 1);
+                }
+            }
+        }
+        
+        if (v[amount] == max)
+            return -1;
+        else
+            return v[amount];
+    }
+};
+
+
+Runtime: 84 ms, faster than 54.50% of C++ online submissions for Coin Change.
+Memory Usage: 14.4 MB, less than 66.14% of C++ online submissions for Coin Change.
+
