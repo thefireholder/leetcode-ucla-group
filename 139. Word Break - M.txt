@@ -1,0 +1,55 @@
+# Runtime: 72 ms, faster than 8.57% of Python3 online submissions for Word Break.
+# Memory Usage: 14.8 MB, less than 6.10% of Python3 online submissions for Word Break.
+
+class Solution:
+    def a(self,sen):
+        # print(sen)
+        emptyN = 0
+        for s in sen: 
+            if s=="": emptyN += 1
+        if emptyN == len(sen): return True
+            
+        # if sen.replace(" ", "") == "": return True
+        for si,s in enumerate(sen):
+            if s == "": continue
+            
+            broken = False
+            for iw,w in enumerate(self.word):
+                # print(s,w)
+                try:
+                    i = s.index(w)
+                    broken = True
+                    # print(i)
+                    j = i + len(w)
+                    news = s[:i]+" "+s[j:]
+                    newSen = sen[:si]+[s[:i]]+[s[j:]]+sen[si+1:]
+                    newSen = sorted(newSen, key=lambda x: len(x))
+                    newSen = list(filter(lambda x: x!="",newSen))
+                    
+                    skip = False
+                    for x in newSen: 
+                        if x in self.notBroken: 
+                            # print("skip bc NB",x,newSen)
+                            skip = True
+                            broken = False
+                            break
+                    if skip: continue
+                        
+                    r = self.a(newSen)
+                    if r: return True
+                    elif r == None: 
+                        broken = False
+                except: continue
+                    
+            if not broken: 
+                self.notBroken.append(s)
+                print("notbroken",self.notBroken)
+                return None
+        return False
+            
+            
+    
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        self.notBroken = []
+        self.word = wordDict
+        return self.a([s])

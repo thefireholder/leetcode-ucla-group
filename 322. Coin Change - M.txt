@@ -1,0 +1,23 @@
+# Runtime: 1048 ms, faster than 92.17% of Python3 online submissions for Coin Change.
+# Memory Usage: 14.8 MB, less than 39.52% of Python3 online submissions for Coin Change.
+Next challenges:
+
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        a = {0:0}
+        for i in range(1,amount+1):
+            # print(a)
+            
+            min_ = None
+            for c in coins:
+                d = i-c
+                # print(d,i,c)
+                if d in a:
+                    # print(d,a,a[d])
+                    count = a[d] + 1
+                    if min_ == None or count < min_: min_ = count
+            if min_ != None: a[i] = min_
+        
+        if amount in a: return a[amount]
+        else: return -1
+                    

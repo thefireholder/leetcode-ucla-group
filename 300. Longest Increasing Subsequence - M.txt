@@ -1,0 +1,22 @@
+# Runtime: 2640 ms, faster than 60.90% of Python3 online submissions for Longest Increasing Subsequence.
+# Memory Usage: 14.5 MB, less than 75.85% of Python3 online submissions for Longest Increasing Subsequence.
+
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        result = 1
+        temp = [1]
+        for i,x in enumerate(nums):
+            # print("where",i)
+            if i == 0: continue
+            localHigh = 1
+            for j in reversed(range(i)):
+                # print("comp",i,j,nums[i],nums[j])
+                if nums[i] > nums[j]:
+                    local = temp[j]+1
+                    if local>localHigh: localHigh = local
+            temp.append(localHigh)
+            if temp[-1] > result: result = temp[-1]
+            # print(temp)
+        return result
+        
+                    
