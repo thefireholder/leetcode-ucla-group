@@ -1,0 +1,13 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if (n == 1 or n == 2):
+            return n
+        array = [1, 2]
+        for i in range(2, n):
+            array.append(array[i-1] + array[i-2])
+        return array[n-1]
+
+'''
+Runtime: 12 ms, faster than 94.77% of Python online submissions for Climbing Stairs.
+Memory Usage: 13.3 MB, less than 66.33% of Python online submissions for Climbing Stairs.
+'''

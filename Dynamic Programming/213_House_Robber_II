@@ -1,0 +1,33 @@
+class Solution(object):
+    def rob(self, nums):
+        if len(nums) == 0: 
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        if len(nums) == 2:
+            return max(nums[0], nums[1])
+        if len(nums) == 3:
+            return max(nums[0], nums[1], nums[2])
+        
+        nums1 = nums[:len(nums)-1]
+        dp = [0]*len(nums1)
+        dp[0] = nums1[0]
+        dp[1] = max(nums1[0], nums1[1])
+    
+        for i in range(2, len(nums1)):
+            dp[i] = max(nums1[i]+dp[i-2], dp[i-1])
+            
+        nums2 = nums[1:]
+        dp2 = [0]*len(nums2)
+        dp2[0] = nums2[0]
+        dp2[1] = max(nums2[0], nums2[1])
+        
+        for i in range(2, len(nums2)):
+            dp2[i] = max(nums2[i]+dp2[i-2], dp2[i-1])
+            
+        return max(dp[len(nums)-2], dp2[len(nums)-2])
+
+'''
+Runtime: 20 ms, faster than 68.05% of Python online submissions for House Robber II.
+Memory Usage: 13.5 MB, less than 43.28% of Python online submissions for House Robber II.
+'''

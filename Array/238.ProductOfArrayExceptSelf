@@ -1,0 +1,20 @@
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        result = [1 for _ in range(len(nums))]
+        
+        x = 1
+        for i in range(len(nums)-1,0,-1):
+            x *= nums[i]
+            result[i-1] *= x
+        
+        x = 1
+        for i in range(1,len(nums)):
+            x *= nums[i-1]
+            result[i] *= x
+            
+        return result
+
+'''
+Runtime: 228 ms, faster than 93.51% of Python3 online submissions for Product of Array Except Self.
+Memory Usage: 21 MB, less than 81.68% of Python3 online submissions for Product of Array Except Self.
+'''

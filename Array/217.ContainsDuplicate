@@ -3,3 +3,8 @@ class Solution:
         if (len(set(nums)) != len(nums)):
             return True
         return False
+
+'''
+Runtime: 116 ms, faster than 85.99% of Python3 online submissions for Contains Duplicate.
+Memory Usage: 19.9 MB, less than 88.49% of Python3 online submissions for Contains Duplicate.
+'''
