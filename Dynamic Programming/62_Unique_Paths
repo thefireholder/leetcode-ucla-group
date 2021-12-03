@@ -1,0 +1,19 @@
+import math
+class Solution(object):
+    def uniquePaths(self, m, n):
+        """
+        :type m: int
+        :type n: int
+        :rtype: int
+        """
+        ## calculate m+n-2Cn-1
+        def nCr(n,r):
+            f = math.factorial
+            return f(n) / f(r) / f(n-r)
+
+        return nCr(m+n-2, n-1)
+
+'''
+Runtime: 16 ms, faster than 82.76% of Python online submissions for Unique Paths.
+Memory Usage: 13.4 MB, less than 73.89% of Python online submissions for Unique Paths.
+'''
