@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int bfbf = 0;
+        int bf = 0;
+        int total = 0;
+        
+        for (int i = 0; i < nums.size(); i++) {
+            total = max(bfbf + nums[i], bf);
+            bfbf = bf;
+            bf = total;
+        }
+        
+        
+        return bf;
+    }
+};
+
+////  (bfbf) (bf) (nums[i])
+
+
+
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for House Robber.
+Memory Usage: 7.6 MB, less than 72.87% of C++ online submissions for House Robber.

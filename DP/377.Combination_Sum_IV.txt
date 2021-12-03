@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        vector<unsigned int> v(target+1, 0);
+        
+        v[0] = 1;
+        
+        for (int i = 1; i <= target; i++) {
+            for (int j = 0; j < nums.size(); j++) {
+                if (i - nums[j] >= 0)
+                    v[i] += v[i-nums[j]];
+            }
+        }
+        
+        return v[target];
+    }
+};
+
+
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Combination Sum IV.
+Memory Usage: 6.8 MB, less than 28.94% of C++ online submissions for Combination Sum IV.
